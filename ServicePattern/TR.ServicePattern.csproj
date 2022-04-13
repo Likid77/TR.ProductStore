@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -7,9 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ServicePattern\TR.ServicePattern.csproj" />
     <ProjectReference Include="..\TR.Data\TR.Data.csproj" />
-    <ProjectReference Include="..\TR.Domain\TR.Domain.csproj" />
   </ItemGroup>
 
 </Project>

@@ -27,19 +27,23 @@ namespace TR.Domain
 
         [Range(0, int.MaxValue)]
         public uint Quantity { get; set; }
-        
+
         [Display(Name = "Production Date")]
         [DataType(DataType.Date)]
         public DateTime DateProd { get; set; }
-        public IList<Provider> Providers { get; set; } = new List<Provider>();
 
-        //[ForeignKey("CategoryId")]
-        public Category Category { get; set; }
 
         [ForeignKey("Category") ] // En rouge, le nom de la propriété de navigation (et non de la classe)
         public uint? CategoryId { get; set; } // "?" = variable nullable
         public string Image { get; set; }
 
+        // Navigation properties
+        // =====================
+        //[ForeignKey("CategoryId")]
+        public virtual Category Category { get; set; }
+        public virtual IList<Provider> Providers { get; set; } = new List<Provider>();
+        public virtual IList<Client> Clients { get; set; } = new List<Client>();
+        public virtual IList<Facture> Factures { get; set; } = new List<Facture>();
 
         // Methods
         // =======

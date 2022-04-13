@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TR.Domain;
 
-namespace TR.Data.Configuration
+namespace TR.Data.Configurations
 {
     public class ProductConfiguration : IEntityTypeConfiguration<Product>
     {
@@ -19,7 +19,6 @@ namespace TR.Data.Configuration
 
             builder.HasMany(p => p.Providers).WithMany(p => p.Products).UsingEntity(t => t.ToTable("Providings"));
             builder.HasOne(p => p.Category).WithMany(c => c.Products).HasForeignKey(p => p.CategoryId).OnDelete(DeleteBehavior.Cascade); // ou .OnDelete(DeleteBehavior.SetNull) si on ne veut pas utiliser la suppression en cascade
-
             //builder.HasDiscriminator<int>("Type").HasValue<Product>(0).HasValue<Biological>(1).HasValue<Chemical>(2);
 
         }

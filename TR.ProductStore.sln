@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TR.Domain", "TR.Domain\TR.D
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TR.Service", "TR.Service\TR.Service.csproj", "{E7DB9DFC-35DD-4046-880B-88256FF0B89C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TR.Data", "TR.Data\TR.Data.csproj", "{5210A33B-C35C-40A2-BF6C-56241156FD0F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TR.Data", "TR.Data\TR.Data.csproj", "{5210A33B-C35C-40A2-BF6C-56241156FD0F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TR.ServicePattern", "ServicePattern\TR.ServicePattern.csproj", "{16DF7299-A45D-424E-ACAF-065ADFDD4E96}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{5210A33B-C35C-40A2-BF6C-56241156FD0F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5210A33B-C35C-40A2-BF6C-56241156FD0F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5210A33B-C35C-40A2-BF6C-56241156FD0F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{16DF7299-A45D-424E-ACAF-065ADFDD4E96}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{16DF7299-A45D-424E-ACAF-065ADFDD4E96}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{16DF7299-A45D-424E-ACAF-065ADFDD4E96}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{16DF7299-A45D-424E-ACAF-065ADFDD4E96}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

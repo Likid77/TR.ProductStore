@@ -31,7 +31,10 @@ namespace TR.Domain
         public string ConfirmPassword { get; set; } = string.Empty;
         public bool IsApproved { get; set; }
         public DateTime DateCreated { get; set; }
-        public IList<Product> Products { get => products; set => products = value; }
+
+        // Navigation properties
+        // =====================
+        public virtual IList<Product> Products { get => products; set => products = value; }
 
         // Methods
         // =======

@@ -7,46 +7,19 @@ using System.Text;
 using System.Threading.Tasks;
 using TR.Domain;
 
-namespace TR.Data.Configuration
+namespace TR.Data.Configurations
 {
     public class CategoryConfiguration : IEntityTypeConfiguration<Category>
     {
         public void Configure(EntityTypeBuilder<Category> builder)
         {
-            builder.ToTable("MyCategories");
-            builder.HasKey(c => c.CategoryId);
+            builder
+                .ToTable("MyCategories")
+                .HasKey(c => c.CategoryId);
             
+            builder.Property(c => c.Name)
+                .IsRequired()
+                .HasMaxLength(50);
         }
     }
 }
-
-
-
-
-//namespace TR.Data.Configuration
-//{
-//    public class ProductConfiguration : IEntityTypeConfiguration<Product>
-//    {
-//        public void Configure(EntityTypeBuilder<Product> builder)
-//        {
-//            builder.HasKey(p => p.ProductId);
-//            builder.Ignore(p => p.Price);
-//            builder.Property(p => p.Name).HasColumnName("Nom Produit").HasMaxLength(50).HasDefaultValue("Name").IsRequired();
-
-//            builder.HasMany(p => p.Providers).WithMany(p => p.Products).UsingEntity(t => t.ToTable("Providings"));
-//            builder.HasOne(p => p.Category).WithMany(c => c.Products).HasForeignKey(p => p.CategoryId).OnDelete(DeleteBehavior.Cascade); // ou .OnDelete(DeleteBehavior.SetNull) si on ne veut pas utiliser la suppression en cascade
-
-//            //builder.HasDiscriminator<int>("Type").HasValue<Product>(0).HasValue<Biological>(1).HasValue<Chemical>(2);
-
-//        }
-//    }
-//}
-
-//using Microsoft.EntityFrameworkCore;
-//using Microsoft.EntityFrameworkCore.Metadata.Builders;
-//using System;
-//using System.Collections.Generic;
-//using System.Linq;
-//using System.Text;
-//using System.Threading.Tasks;
-//using TR.Domain;

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TR.Data;
 
@@ -11,9 +12,10 @@ using TR.Data;
 namespace TR.Data.Migrations
 {
     [DbContext(typeof(TRContext))]
-    partial class TRContextModelSnapshot : ModelSnapshot
+    [Migration("20220413022909_Chapitre 4 Update")]
+    partial class Chapitre4Update
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -24,8 +26,8 @@ namespace TR.Data.Migrations
 
             modelBuilder.Entity("ClientProduct", b =>
                 {
-                    b.Property<long>("ClientsCIN")
-                        .HasColumnType("bigint");
+                    b.Property<string>("ClientsCIN")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<long>("ProductsProductId")
                         .HasColumnType("bigint");
@@ -73,11 +75,8 @@ namespace TR.Data.Migrations
 
             modelBuilder.Entity("TR.Domain.Client", b =>
                 {
-                    b.Property<long>("CIN")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("CIN"), 1L, 1);
+                    b.Property<string>("CIN")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime>("DateNaissance")
                         .HasColumnType("datetime2");
@@ -96,34 +95,7 @@ namespace TR.Data.Migrations
 
                     b.HasKey("CIN");
 
-                    b.ToTable("Clients", (string)null);
-                });
-
-            modelBuilder.Entity("TR.Domain.Facture", b =>
-                {
-                    b.Property<long>("ClientFK")
-                        .HasColumnType("bigint");
-
-                    b.Property<long>("ProductFK")
-                        .HasColumnType("bigint");
-
-                    b.Property<long>("ClientFk")
-                        .HasColumnType("bigint");
-
-                    b.Property<DateTime>("DateAchat")
-                        .HasColumnType("datetime2");
-
-                    b.Property<float>("Prix")
-                        .HasColumnType("real");
-
-                    b.Property<long>("ProductFk")
-                        .HasColumnType("bigint");
-
-                    b.HasKey("ClientFK", "ProductFK");
-
-                    b.HasIndex("ProductFK");
-
-                    b.ToTable("Factures", (string)null);
+                    b.ToTable("Clients");
                 });
 
             modelBuilder.Entity("TR.Domain.Product", b =>
@@ -154,16 +126,21 @@ namespace TR.Data.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)")
                         .HasDefaultValue("Name")
-                        .HasColumnName("MyName");
+                        .HasColumnName("Nom Produit");
 
                     b.Property<long>("Quantity")
                         .HasColumnType("bigint");
+
+                    b.Property<int>("Type")
+                        .HasColumnType("int");
 
                     b.HasKey("ProductId");
 
                     b.HasIndex("CategoryId");
 
-                    b.ToTable("Products", (string)null);
+                    b.ToTable("Products");
+
+                    b.HasDiscriminator<int>("Type").HasValue(0);
                 });
 
             modelBuilder.Entity("TR.Domain.Provider", b =>
@@ -205,7 +182,7 @@ namespace TR.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.ToTable("Biologicals", (string)null);
+                    b.HasDiscriminator().HasValue(1);
                 });
 
             modelBuilder.Entity("TR.Domain.Chemical", b =>
@@ -216,7 +193,7 @@ namespace TR.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.ToTable("Chemicals", (string)null);
+                    b.HasDiscriminator().HasValue(2);
                 });
 
             modelBuilder.Entity("ClientProduct", b =>
@@ -249,25 +226,6 @@ namespace TR.Data.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("TR.Domain.Facture", b =>
-                {
-                    b.HasOne("TR.Domain.Client", "Client")
-                        .WithMany("Factures")
-                        .HasForeignKey("ClientFK")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("TR.Domain.Product", "Product")
-                        .WithMany("Factures")
-                        .HasForeignKey("ProductFK")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Client");
-
-                    b.Navigation("Product");
-                });
-
             modelBuilder.Entity("TR.Domain.Product", b =>
                 {
                     b.HasOne("TR.Domain.Category", "Category")
@@ -279,23 +237,8 @@ namespace TR.Data.Migrations
                     b.Navigation("Category");
                 });
 
-            modelBuilder.Entity("TR.Domain.Biological", b =>
-                {
-                    b.HasOne("TR.Domain.Product", null)
-                        .WithOne()
-                        .HasForeignKey("TR.Domain.Biological", "ProductId")
-                        .OnDelete(DeleteBehavior.ClientCascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("TR.Domain.Chemical", b =>
                 {
-                    b.HasOne("TR.Domain.Product", null)
-                        .WithOne()
-                        .HasForeignKey("TR.Domain.Chemical", "ProductId")
-                        .OnDelete(DeleteBehavior.ClientCascade)
-                        .IsRequired();
-
                     b.OwnsOne("TR.Domain.Address", "Address", b1 =>
                         {
                             b1.Property<long>("ChemicalProductId")
@@ -314,7 +257,7 @@ namespace TR.Data.Migrations
 
                             b1.HasKey("ChemicalProductId");
 
-                            b1.ToTable("Chemicals");
+                            b1.ToTable("Products");
 
                             b1.WithOwner()
                                 .HasForeignKey("ChemicalProductId");
@@ -327,16 +270,6 @@ namespace TR.Data.Migrations
             modelBuilder.Entity("TR.Domain.Category", b =>
                 {
                     b.Navigation("Products");
-                });
-
-            modelBuilder.Entity("TR.Domain.Client", b =>
-                {
-                    b.Navigation("Factures");
-                });
-
-            modelBuilder.Entity("TR.Domain.Product", b =>
-                {
-                    b.Navigation("Factures");
                 });
 #pragma warning restore 612, 618
         }

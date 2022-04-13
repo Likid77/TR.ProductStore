@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TR.Data;
 
@@ -11,9 +12,10 @@ using TR.Data;
 namespace TR.Data.Migrations
 {
     [DbContext(typeof(TRContext))]
-    partial class TRContextModelSnapshot : ModelSnapshot
+    [Migration("20220413025104_Added class Facture")]
+    partial class AddedclassFacture
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

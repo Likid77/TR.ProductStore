@@ -12,7 +12,7 @@ namespace TR.Domain
         // ==========
         public uint CategoryId { get; set; }
         public string Name { get; set; } = string.Empty;
-        public IList<Product> Products { get; set; } = new List<Product>();
+        public virtual IList<Product> Products { get; set; } = new List<Product>();
 
 
         // Methods
