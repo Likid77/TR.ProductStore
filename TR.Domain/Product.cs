@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TR.Domain
 {
@@ -13,15 +8,15 @@ namespace TR.Domain
         // Properties
         // ==========
         public uint ProductId { get; set; }
-        
-        [Required(ErrorMessage ="Merci d'ajouter votre nom.")]
-        [StringLength(25, ErrorMessage ="Ce champ doit contenir 25 caractères maximum.")]
+
+        [Required(ErrorMessage = "Merci d'ajouter votre nom.")]
+        [StringLength(25, ErrorMessage = "Ce champ doit contenir 25 caractères maximum.")]
         [MaxLength(50, ErrorMessage = "Cette propriété doit contenir 50 caractères maximum.")]
         public string Name { get; set; } = string.Empty;
-        
+
         [DataType(DataType.MultilineText)]
         public string Description { get; set; } = string.Empty;
-        
+
         [DataType(DataType.Currency)]
         public double Price { get; set; }
 
@@ -33,7 +28,7 @@ namespace TR.Domain
         public DateTime DateProd { get; set; }
 
 
-        [ForeignKey("Category") ] // En rouge, le nom de la propriété de navigation (et non de la classe)
+        [ForeignKey("Category")] // En rouge, le nom de la propriété de navigation (et non de la classe)
         public uint? CategoryId { get; set; } // "?" = variable nullable
         public string Image { get; set; }
 

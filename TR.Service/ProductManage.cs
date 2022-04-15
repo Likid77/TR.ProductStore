@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TR.Domain;
+﻿using TR.Domain;
 
 namespace TR.Service
 {
@@ -22,14 +17,14 @@ namespace TR.Service
         // Methods
         // =======
         //Return list of products starting with a given letter
-            //public IList<Product> FindProducts(FindProductsD styleOfOutput, string firstLetter)
-            //{ return styleOfOutput(Products, firstLetter); }
+        //public IList<Product> FindProducts(FindProductsD styleOfOutput, string firstLetter)
+        //{ return styleOfOutput(Products, firstLetter); }
         public IList<Product> FindProducts(FindProductsD styleOfOutput, string firstLetter) => styleOfOutput(Products, firstLetter);
         //public delegate IList<Product> FindProductsD(IList<Product> products, string delFirstLetter); // TR Est-ce que je peux remplacer string par char?
 
         // Display list of products for a given category
-            //public void ScanProducts(ScanProductsD typeOfDisplay, Category category)
-            //{ typeOfDisplay(category); }
+        //public void ScanProducts(ScanProductsD typeOfDisplay, Category category)
+        //{ typeOfDisplay(category); }
         public void ScanProducts(ScanProductsD typeOfDisplay, Category category) => typeOfDisplay(category);
         //public delegate void ScanProductsD(Category delCategory);
 

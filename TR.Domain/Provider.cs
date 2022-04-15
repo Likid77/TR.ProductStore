@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TR.Domain
 {
@@ -20,7 +15,7 @@ namespace TR.Domain
         [Key]
         public uint Id { get; set; }
         public string UserName { get; set; } = string.Empty;
-        
+
         [EmailAddress, Required]
         public string Email { get; set; } = string.Empty;
 
@@ -44,9 +39,9 @@ namespace TR.Domain
         public static void SetIsApproved(string password, string confirmPassword, bool isApproved) => isApproved = password == confirmPassword;
 
         // Login
-            // Methods 1 and 2 (expression body form), combined in the "Login" method below:
-            //public bool LoginMethod1(string userName, string password) => userName == this.userName && password == this.password;
-            //public bool LoginMethod2(string userName, string password, string email) => userName == this.userName && password == this.password && email == this.email;
+        // Methods 1 and 2 (expression body form), combined in the "Login" method below:
+        //public bool LoginMethod1(string userName, string password) => userName == this.userName && password == this.password;
+        //public bool LoginMethod2(string userName, string password, string email) => userName == this.userName && password == this.password && email == this.email;
         public bool Login(string userName, string password, string email = "")
         {
             return !string.IsNullOrEmpty(email)
@@ -198,7 +193,7 @@ namespace TR.Domain
                     }
             }
         }
-        
+
         // Provider Menu
         public void ProviderMenu()
         {
@@ -340,11 +335,11 @@ namespace TR.Domain
                 $"\n" +
                 $"Modifier mon mot de passe\n" +
                 $"-------------------------");
-            
+
             // Enter old password
             Console.Write("Veuillez saisir votre ancien mot de passe : ");
             string passwordToTest = Console.ReadLine();
-            
+
             // Check if password old is correctly entered
             while (passwordToTest != Password)
             {
@@ -355,7 +350,7 @@ namespace TR.Domain
             // Enter new password
             Console.Write("Veuillez saisir votre nouveau mot de passe : ");
             passwordToTest = Console.ReadLine();
-            
+
             // Check if new password's length is regulatory
             while (passwordToTest.Length is < 5 or > 20)
             {
@@ -365,7 +360,7 @@ namespace TR.Domain
             // Re-enter new password
             Console.Write("Veuillez ressaisir votre nouveau mot de passe : ");
             var secondPasswordToTest = Console.ReadLine();
-            
+
             // Check if new password is correctly entered
             while (passwordToTest != secondPasswordToTest)
             {

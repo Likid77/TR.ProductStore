@@ -1,16 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TR.Domain;
+﻿using TR.Domain;
+using TR.ServicePattern;
 
 namespace TR.Service
 {
-    public interface ICategoryService
+    public interface ICategoryService : IService<Category>
     {
-        public void Add(Category category);
-        public void Remove(Category category);
-        public IList<Category> GetAll();
+        //public void Add(Category category);
+        //public void Remove(Category category);
+        //public IList<Category> GetAll();
     }
 }

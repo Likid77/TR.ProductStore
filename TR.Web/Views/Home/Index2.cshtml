@@ -1,0 +1,16 @@
+﻿@model IEnumerable<TR.Domain.Product>
+@{
+    ViewData["Title"] = "Home Page v2";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome to Index 2</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    @foreach(var item in Model)
+    {
+        @item.Name<br />
+        @item.Description<br />
+        @item.Price<br />
+    }
+
+</div>

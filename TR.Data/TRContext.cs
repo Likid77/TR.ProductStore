@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using TR.Data.Configurations;
 using TR.Domain;
 
@@ -64,7 +59,7 @@ namespace TR.Data
             modelBuilder.Entity<Chemical>().ToTable("Chemicals");
             modelBuilder.Entity<Category>().ToTable("MyCategories");
             modelBuilder.Entity<Client>().ToTable("Clients");
-            modelBuilder.Entity<Facture>().ToTable("Factures");
+            //modelBuilder.Entity<Facture>().ToTable("Factures");
         }
     }
 }

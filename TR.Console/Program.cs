@@ -1,7 +1,8 @@
-﻿using System.Linq;
+﻿using Microsoft.Extensions.DependencyInjection;
+using TR.Data;
+using TR.Data.Infrastructure;
 using TR.Domain;
 using TR.Service;
-using TR.Data;
 
 namespace TR.Console
 {
@@ -9,7 +10,7 @@ namespace TR.Console
     {
         static void Main(string[] args)
         {
-            TRContext _context = new TRContext();
+            TRContext _context = new();
             //context.Products.Add(new Product()
             //{
             //    DateProd = new DateTime(12, 12, 20),
@@ -23,7 +24,24 @@ namespace TR.Console
                 System.Console.WriteLine(item.Name);
                 System.Console.WriteLine(item.Category.Name);
             }
+
+            var serviceCollection = new ServiceCollection(); // Cette ligne vient de créer un conteneur d’injection de dépendance
+
+            //serviceCollection.AddSingleton<IProductService, ProductService>(); // Une seule instance créée pour toute l’application
+            //serviceCollection.AddTransient<IProductService, ProductService>(); // Une instance créée à chaque demande
+            serviceCollection.AddScoped<IProductService, ProductService>(); // Une instance sera créée pour chaque requête HTTP
+            serviceCollection.AddScoped<IDatabaseFactory, DatabaseFactory>();
+            serviceCollection.AddScoped<IUnitOfWork, UnitOfWork>();
+
+            var serviceProvider = serviceCollection.BuildServiceProvider();
+            var productService = serviceProvider.GetService<IProductService>();
+
+
+            productService.Add(new Product() { Name = "Apple", Description = "Laptop", Price = 4000, Category = new Category() { Name = "Electronique" } });
+            productService.Commit();
         }
+
+
     }
 
     //        // Manual adding of the providers, products and categories
@@ -76,7 +94,7 @@ namespace TR.Console
     //        foreach (Product product in productsManage.FindProducts(FindProductsResultLowerCase, "s"))
     //        { System.Console.WriteLine(product.Name); }
     //        System.Console.WriteLine("");
-            
+
     //        System.Console.WriteLine(
     //            "Méthode ScanProducts avec 2 outputs différents :\n" +
     //            "------------------------------------------------\n" +
@@ -184,7 +202,7 @@ namespace TR.Console
     //            "================================================================\n" +
     //            " Connexion                                                      \n" +
     //            "================================================================\n");
-            
+
     //        // Enter username
     //        System.Console.Write("Nom d'utilisateur : ");
     //        string userName = System.Console.ReadLine().Trim();
@@ -193,7 +211,7 @@ namespace TR.Console
     //            System.Console.Write("Veuillez saisir votre nom d'utilisateur : ");
     //            userName = System.Console.ReadLine().Trim();
     //        }
-            
+
     //        // Check if username exists in the database
     //        bool isValidUserName = false;
     //        while (isValidUserName == false)

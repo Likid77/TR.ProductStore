@@ -101,29 +101,25 @@ namespace TR.Data.Migrations
 
             modelBuilder.Entity("TR.Domain.Facture", b =>
                 {
-                    b.Property<long>("ClientFK")
-                        .HasColumnType("bigint");
-
-                    b.Property<long>("ProductFK")
-                        .HasColumnType("bigint");
+                    b.Property<DateTime>("DateAchat")
+                        .HasColumnType("datetime2");
 
                     b.Property<long>("ClientFk")
                         .HasColumnType("bigint");
 
-                    b.Property<DateTime>("DateAchat")
-                        .HasColumnType("datetime2");
+                    b.Property<long>("ProductFk")
+                        .HasColumnType("bigint");
 
                     b.Property<float>("Prix")
                         .HasColumnType("real");
 
-                    b.Property<long>("ProductFk")
-                        .HasColumnType("bigint");
+                    b.HasKey("DateAchat", "ClientFk", "ProductFk");
 
-                    b.HasKey("ClientFK", "ProductFK");
+                    b.HasIndex("ClientFk");
 
-                    b.HasIndex("ProductFK");
+                    b.HasIndex("ProductFk");
 
-                    b.ToTable("Factures", (string)null);
+                    b.ToTable("Factures");
                 });
 
             modelBuilder.Entity("TR.Domain.Product", b =>
@@ -253,13 +249,13 @@ namespace TR.Data.Migrations
                 {
                     b.HasOne("TR.Domain.Client", "Client")
                         .WithMany("Factures")
-                        .HasForeignKey("ClientFK")
+                        .HasForeignKey("ClientFk")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("TR.Domain.Product", "Product")
                         .WithMany("Factures")
-                        .HasForeignKey("ProductFK")
+                        .HasForeignKey("ProductFk")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

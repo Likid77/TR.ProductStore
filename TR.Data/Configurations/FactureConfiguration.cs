@@ -1,10 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TR.Domain;
 
 namespace TR.Data.Configurations
@@ -15,17 +10,18 @@ namespace TR.Data.Configurations
         {
             builder.HasKey(f => new
             {
-                f.ClientFK,
-                f.ProductFK
+                f.DateAchat,
+                f.ClientFk,
+                f.ProductFk
             });
             builder
                 .HasOne(f => f.Client)
                 .WithMany(c => c.Factures)
-                .HasForeignKey(f => f.ClientFK);
+                .HasForeignKey(f => f.ClientFk);
             builder
                 .HasOne(f => f.Product)
                 .WithMany(p => p.Factures)
-                .HasForeignKey(f => f.ProductFK);
+                .HasForeignKey(f => f.ProductFk);
         }
     }
 }
